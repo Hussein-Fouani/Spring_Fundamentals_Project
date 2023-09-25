@@ -26,6 +26,22 @@ public class BeerServiceImpl implements BeerService {
         return beerMap.get(id);
     }
 
+    @Override
+    public Beer savenewBeer(Beer beer) {
+        Beer beer1 = Beer.builder().
+                id(beer.getId())
+                        .beerName(beer.getBeerName())
+                                .beerStyle(beer.getBeerStyle())
+                                        .quantityonHand(beer.getQuantityonHand())
+                                                .createdDate(beer.getCreatedDate())
+                                                        .price(beer.getPrice())
+                                                            .version(1)
+                                                                .upc(beer.getUpc()).build();
+
+        beerMap.put(beer.getId(),beer1) ;
+        return beer1;
+    }
+
     public BeerServiceImpl() {
         beerMap = new HashMap<>();
         Beer beer1 = Beer.builder()
