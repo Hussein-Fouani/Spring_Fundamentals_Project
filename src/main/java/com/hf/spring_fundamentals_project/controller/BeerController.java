@@ -4,6 +4,7 @@ import com.hf.spring_fundamentals_project.model.Beer;
 import com.hf.spring_fundamentals_project.service.BeerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,12 @@ import java.util.UUID;
 @RequestMapping("/api/v1/beer")
 public class BeerController {
     private final BeerService beerService;
-    public ResponseEntity handePost(Beer beer){
+    public ResponseEntity handePost(@RequestBody Beer beer){
         Beer beer1 = beerService.savenewBeer(beer);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Location","/api/v1/beer/" + beer1.getId().toString());
+
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
