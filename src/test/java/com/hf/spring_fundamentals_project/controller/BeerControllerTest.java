@@ -13,6 +13,6 @@ class BeerControllerTest {
     BeerController beerController;
     @Test
     void getBeerById() {
-        System.out.println(beerController.g);
+
     }
 }
