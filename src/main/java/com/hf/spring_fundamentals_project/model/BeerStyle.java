@@ -9,5 +9,6 @@ import java.util.UUID;
 
 
 public class BeerStyle {
+    public static String Pale_ALe ;
 
 }
