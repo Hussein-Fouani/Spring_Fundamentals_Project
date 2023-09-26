@@ -15,25 +15,27 @@ import java.util.UUID;
 @RestController
 @Slf4j
 @AllArgsConstructor
-@RequestMapping("/api/v1/beer")
 public class BeerController {
-    private final BeerService beerService;
+    public final BeerService beerService;
 
-    @DeleteMapping("{beerId")
+    public static final String beerPath ="api/v1/beer";
+    public static final String beerIDPath =beerPath + "/{beerId}";
+
+    @DeleteMapping("beerIDPath")
     public ResponseEntity deleteById(@PathVariable  UUID beerId,Beer beer){
 
-        beerService.deleteById(beerId,beer);
+        beerService.deleteById(beerId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("{beerId")
+    @PatchMapping("beerIDPath")
     public ResponseEntity updateBeerPatchById(@PathVariable UUID beerId,Beer beer){
         beerService.updateBeerpatchById(beerId,beer);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
 
-    @PutMapping("{beerId}")
+    @PutMapping("beerIDPath")
     public ResponseEntity UpdateByID(@PathVariable UUID beerId, @RequestBody Beer beer){
         beerService.updateById(beerId,beer);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -49,12 +51,12 @@ public class BeerController {
     }
 
     @PostMapping
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping(beerPath)
     public List<Beer> listBeers(){
         return beerService.listBeers();
 
     }
-    @RequestMapping(value = "{beerId}",method = RequestMethod.GET)
+    @GetMapping(value = "beerIDPath")
     public Beer getBeerById(@PathVariable("beerId") UUID beerId) {
 
         log.debug("Get Bear by ID -in services. id" + beerId.toString());
