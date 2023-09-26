@@ -22,6 +22,7 @@ import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(BeerController.class)
@@ -47,9 +48,15 @@ class SpringFundamentalsProjectApplicationTests {
     }
 
     @Test
-    void testCreateNewBear() throws JsonProcessingException {
+    void testCreateNewBear() throws Exception {
         Beer beer = beerServiceimpl.listBeers().get(0);
-        System.out.println(objectMapper.writeValueAsString(beer));
+        beer.setVersion(null);
+        beer.setId(null);
+        given(beerServiceimpl.savenewBeer(any(Beer.class))).willReturn(beerServiceimpl.listBeers().get(1));
+        mockito.perform(post("api/v1/beer").accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(beer)))
+                .andExpect(status().isCreated())
+                .andExpect(header().exists("locations"));
     }
 
     @Test
