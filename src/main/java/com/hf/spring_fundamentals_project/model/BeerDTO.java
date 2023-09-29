@@ -1,6 +1,5 @@
-package com.hf.spring_fundamentals_project.entities;
+package com.hf.spring_fundamentals_project.model;
 
-import com.hf.spring_fundamentals_project.model.BeerStyle;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,8 +7,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Data
 @Builder
+@Data
 public class BeerDTO {
     private UUID id;
     private Integer version;
@@ -19,6 +18,5 @@ public class BeerDTO {
     private Integer quantityOnHand;
     private BigDecimal price;
     private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
-
+    private LocalDateTime updateDate;
 }
