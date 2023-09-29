@@ -1,25 +1,17 @@
-package com.hf.spring_fundamentals_project.model;
+package com.hf.spring_fundamentals_project.entities;
 
-
-import jakarta.persistence.*;
-import lombok.*;
+import com.hf.spring_fundamentals_project.model.BeerStyle;
+import lombok.Builder;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-
+@Data
 @Builder
-@Getter
-@Setter
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-public class Beer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class BeerDTO {
     private UUID id;
-    @Version
     private Integer version;
     private String beerName;
     private BeerStyle beerStyle;
@@ -28,6 +20,5 @@ public class Beer {
     private BigDecimal price;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
-
 
 }

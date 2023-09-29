@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import static com.hf.spring_fundamentals_project.controller.BeerController.beerPath;
@@ -114,7 +115,7 @@ class SpringFundamentalsProjectApplicationTests {
     void contextLoads() throws Exception {
         Beer testcase = beerServiceimpl.listBeers().get(0);
         mockito.perform(get(beerPath +"/" + UUID.randomUUID()).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON)).andExpect( jsonPath("$.id",is(testcase.getId().toString())));
-        given(beerService.getBeerById(testcase.getId())).willReturn(testcase);
+        given(beerService.getBeerById(testcase.getId())).willReturn(Optional.of(testcase));
     }
 
 }

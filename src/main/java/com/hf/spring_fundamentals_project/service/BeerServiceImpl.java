@@ -23,8 +23,8 @@ public class BeerServiceImpl implements BeerService {
     public Map<UUID, Beer> beerMap;
 
     @Override
-    public Beer getBeerById(UUID id) {
-        return beerMap.get(id);
+    public Optional<Beer> getBeerById(UUID id) {
+        return Optional.of(beerMap.get(id))  ;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class BeerServiceImpl implements BeerService {
                 id(beer.getId())
                         .beerName(beer.getBeerName())
                                 .beerStyle(beer.getBeerStyle())
-                                        .quantityonHand(beer.getQuantityonHand())
+                                        .quantityOnHand(beer.getQuantityOnHand())
                                                 .createdDate(beer.getCreatedDate())
                                                         .price(beer.getPrice())
                                                             .version(1)
@@ -46,12 +46,12 @@ public class BeerServiceImpl implements BeerService {
     @Override
     public void updateById(UUID beerId, Beer beer) {
 
-        Beer beer1  = beerMap.get( beer);
+        Beer beer1  = beerMap.get( beerId);
         beer1.setBeerName(beer.getBeerName());
         beer1.setBeerStyle(beer.getBeerStyle());
         beer1.setPrice(beer.getPrice());
         beer1.setCreatedDate(beer.getCreatedDate());
-        beer1.setQuantityonHand(beer.getQuantityonHand());
+        beer1.setQuantityOnHand(beer.getQuantityOnHand());
         beer1.setVersion(beer.getVersion());
         beer1.setUpdatedDate(beer.getUpdatedDate());
         beerMap.put(beer1.getId(),beer1);
@@ -74,8 +74,8 @@ public class BeerServiceImpl implements BeerService {
        if(beer.getPrice()!=null){
            existing.setPrice(beer.getPrice());
        }
-       if(beer.getQuantityonHand()!=null){
-           existing.setQuantityonHand(beer.getQuantityonHand());
+       if(beer.getQuantityOnHand()!=null){
+           existing.setQuantityOnHand(beer.getQuantityOnHand());
        }
        if(StringUtils.hasText(beer.getUpc())){
            existing.setUpc(beer.getUpc());
@@ -92,7 +92,7 @@ public class BeerServiceImpl implements BeerService {
                 .beerStyle(BeerStyle.PALE_ALE)
                 .upc("12356")
                 .price(new BigDecimal("12.99"))
-                .quantityonHand(122)
+                .quantityOnHand(122)
                 .createdDate(LocalDateTime.now())
                 .updatedDate(LocalDateTime.now())
                 .build();
@@ -104,7 +104,7 @@ public class BeerServiceImpl implements BeerService {
                 .beerStyle(BeerStyle.PALE_ALE)
                 .upc("12356222")
                 .price(new BigDecimal("11.99"))
-                .quantityonHand(392)
+                .quantityOnHand(392)
                 .createdDate(LocalDateTime.now())
                 .updatedDate(LocalDateTime.now())
                 .build();
@@ -116,7 +116,7 @@ public class BeerServiceImpl implements BeerService {
                 .beerStyle(BeerStyle.IPA)
                 .upc("12356")
                 .price(new BigDecimal("13.99"))
-                .quantityonHand(144)
+                .quantityOnHand(144)
                 .createdDate(LocalDateTime.now())
                 .updatedDate(LocalDateTime.now())
                 .build();
