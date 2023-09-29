@@ -1,5 +1,6 @@
 package com.hf.spring_fundamentals_project.controller;
 
+import com.hf.spring_fundamentals_project.entities.BeerDTO;
 import com.hf.spring_fundamentals_project.model.Beer;
 import com.hf.spring_fundamentals_project.service.BeerService;
 import lombok.AllArgsConstructor;
@@ -52,14 +53,14 @@ public class BeerController {
 
     @PostMapping
     @GetMapping(beerPath)
-    public List<Beer> listBeers(){
+    public List<BeerDTO> listBeers(){
         return beerService.listBeers();
 
     }
 
 
     @GetMapping(value = "beerIDPath")
-    public Beer getBeerById(@PathVariable("beerId") UUID beerId) {
+    public BeerDTO getBeerById(@PathVariable("beerId") UUID beerId) {
 
         log.debug("Get Bear by ID -in services. id" + beerId.toString());
         return beerService.getBeerById(beerId).orElseThrow(NotFoundException::new);

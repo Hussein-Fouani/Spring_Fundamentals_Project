@@ -1,5 +1,6 @@
 package com.hf.spring_fundamentals_project.service;
 
+import com.hf.spring_fundamentals_project.entities.BeerDTO;
 import com.hf.spring_fundamentals_project.model.Beer;
 import com.hf.spring_fundamentals_project.model.BeerStyle;
 import lombok.extern.slf4j.Slf4j;
@@ -16,14 +17,14 @@ public class BeerServiceImpl implements BeerService {
     BeerService beerService;
 
     @Override
-    public List<Beer> listBeers(){
+    public List<BeerDTO> listBeers(){
         return new ArrayList<>(beerMap.values());
     }
 
     public Map<UUID, Beer> beerMap;
 
     @Override
-    public Optional<Beer> getBeerById(UUID id) {
+    public Optional<BeerDTO> getBeerById(UUID id) {
         return Optional.of(beerMap.get(id))  ;
     }
 

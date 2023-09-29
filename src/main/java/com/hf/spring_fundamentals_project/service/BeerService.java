@@ -1,5 +1,6 @@
 package com.hf.spring_fundamentals_project.service;
 
+import com.hf.spring_fundamentals_project.entities.BeerDTO;
 import com.hf.spring_fundamentals_project.model.Beer;
 
 import java.util.List;
@@ -7,9 +8,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface BeerService {
-    List<Beer> listBeers();
+    List<BeerDTO> listBeers();
 
-    Optional<Beer> getBeerById(UUID id);
+    Optional<BeerDTO> getBeerById(UUID id);
 
     Beer savenewBeer(Beer beer);
 
