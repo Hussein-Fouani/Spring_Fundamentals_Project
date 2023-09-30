@@ -3,7 +3,6 @@ package com.hf.spring_fundamentals_project.service;
 import com.hf.spring_fundamentals_project.mappers.BeerMapper;
 import com.hf.spring_fundamentals_project.model.BeerDTO;
 import com.hf.spring_fundamentals_project.repositories.BeerRepository;
-import com.hf.spring_fundamentals_project.service.BeerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;

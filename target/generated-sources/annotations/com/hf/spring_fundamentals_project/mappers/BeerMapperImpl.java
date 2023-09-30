@@ -1,7 +1,7 @@
 package com.hf.spring_fundamentals_project.mappers;
 
-import com.hf.spring_fundamentals_project.model.Beer;
-import com.hf.spring_fundamentals_project.model.Beer.BeerBuilder;
+import com.hf.spring_fundamentals_project.entities.Beer;
+import com.hf.spring_fundamentals_project.entities.Beer.BeerBuilder;
 import com.hf.spring_fundamentals_project.model.BeerDTO;
 import com.hf.spring_fundamentals_project.model.BeerDTO.BeerDTOBuilder;
 import javax.annotation.processing.Generated;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-09-29T19:42:57+0300",
+    date = "2023-09-30T11:38:11+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 19.0.2 (Oracle Corporation)"
 )
 @Component

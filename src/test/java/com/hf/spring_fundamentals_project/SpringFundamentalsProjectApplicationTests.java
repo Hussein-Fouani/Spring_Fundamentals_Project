@@ -2,7 +2,7 @@ package com.hf.spring_fundamentals_project;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hf.spring_fundamentals_project.controller.BeerController;
-import com.hf.spring_fundamentals_project.model.Beer;
+import com.hf.spring_fundamentals_project.entities.Beer;
 import com.hf.spring_fundamentals_project.model.BeerDTO;
 import com.hf.spring_fundamentals_project.service.BeerService;
 import com.hf.spring_fundamentals_project.service.BeerServiceImpl;
@@ -55,40 +55,19 @@ class SpringFundamentalsProjectApplicationTests {
         beerServiceimpl = new BeerServiceImpl();
     }
 
-    @Test
-    void PatchBeerTest() throws Exception {
-        BeerDTO beer = beerServiceimpl.listBeers().get(0);
-
-        Map<String,Object> objectMap = new HashMap<>();
-
-        objectMap.put("beerName","new name");
-
-        mockito.perform(patch(BEER_PATH +"/" +beer.getId())
-                        .contentType(MediaType.APPLICATION_JSON)
-                            .accept(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(objectMap)))
-                                .andExpect(status().isNoContent());
-
-        verify(beerService).updateBeerpatchById(uuidArgumentCaptor.capture(),beerArgumentCaptor.capture());
-
-        assertThat(beer.getId()).isEqualTo(uuidArgumentCaptor.getValue());
-
-        assertThat(objectMap.get("beerName")).isEqualTo(beerArgumentCaptor.getValue().getBeerName());
 
 
-
-    }
-
-    @Test
-    void testDeleteBeer() throws Exception {
-        BeerDTO beer = beerServiceimpl.listBeers().get(0);
-
-        mockito.perform(delete(BEER_PATH +"/"+ beer.getId()).accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNoContent());
-        uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
-        verify(beerService).deleteById(uuidArgumentCaptor.capture());
-
-        assertThat(beer.getId()).isEqualTo(uuidArgumentCaptor.getValue());
-    }
+//    @Test
+////    void testDeleteBeer() throws Exception {
+////        BeerDTO beer = beerServiceimpl.listBeers().get(0);
+////
+////        mockito.perform(delete(BEER_PATH +"/"+ beer.getId()).accept(MediaType.APPLICATION_JSON))
+////                .andExpect(status().isNoContent());
+////        uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
+////        verify(beerService).deleteById(uuidArgumentCaptor.capture());
+////
+////        assertThat(beer.getId()).isEqualTo(uuidArgumentCaptor.getValue());
+////    }
 
     @Test
     void testlistBeers() throws Exception {

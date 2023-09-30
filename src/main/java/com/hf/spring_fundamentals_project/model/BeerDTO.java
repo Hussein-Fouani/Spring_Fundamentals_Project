@@ -12,6 +12,7 @@ import java.util.UUID;
 @Builder
 @Data
 public class BeerDTO {
+
     private UUID id;
     private Integer version;
     @NotNull
