@@ -1,53 +1,86 @@
+# Spring Fundamentals – Beer & Customer REST API
 
----
+A Spring Boot REST API for managing beers and customers, built to practice Spring fundamentals: dependency injection, REST controllers, Spring Data JPA, MapStruct mapping, validation and testing with MockMvc.
 
-# Beer Project with Spring Framework Implementation
+## Tech Stack
 
-Welcome to the Beer Project! This repository serves as a demonstration and implementation of various Spring Framework concepts for building robust and scalable web applications.
+- Java 17, Spring Boot 3.1
+- Spring Web, Spring Data JPA (Hibernate)
+- H2 (default, in-memory) and MySQL (`localmysql` profile)
+- MapStruct, Lombok, Bean Validation
+- JUnit 5, Mockito, MockMvc
 
-## Project Overview:
+## Features
 
-The Beer Project is designed to showcase the application of Spring Framework features, including:
+- Beer API: list, get by id, create (validated), update, delete — backed by JPA
+- Customer API: list and get by id backed by JPA
+- 404 responses for unknown ids, 400 with field errors for invalid beer payloads
+- In-memory implementations of both services (`BeerServiceImpl`, `CustomerServiceImpl`) used in the controller unit tests
 
-- **Dependency Injection and Inversion of Control (IoC):** Utilizing Spring's powerful IoC container to manage dependencies and promote decoupling of components.
+Work in progress: beer PATCH and customer create/update/patch/delete are not implemented in the JPA services yet.
 
-- **Spring Boot:** Employing Spring Boot to simplify application setup, development, and deployment, allowing for rapid development of production-ready applications.
+## Getting Started
 
-- **Spring MVC:** Implementing the Model-View-Controller design pattern for creating a structured and maintainable web application.
+### Prerequisites
 
-- **RESTful Web Services:** Building APIs for managing beer resources, demonstrating best practices for designing and implementing RESTful services.
+- JDK 17
+- MySQL (only for the `localmysql` profile)
 
-- **Database Interaction:** Integrating data access with Spring Data JPA, showcasing how to interact with databases for persistent storage.
+### Run with H2 (default)
 
-- **Thymeleaf (or preferred template engine):** Implementing dynamic views for rendering HTML templates on the server side.
+```bash
+git clone https://github.com/Hussein-Fouani/Spring_Fundamentals_Project.git
+cd Spring_Fundamentals_Project
+./mvnw spring-boot:run
+```
 
-## Getting Started:
+The API runs on `http://localhost:8080`.
 
-To run this project locally, follow these steps:
+### Run with MySQL
 
-1. **Clone the Repository:**
-   ```
-   git clone https://github.com/yourusername/beer-project.git
-   ```
+Create the database and user with `src/main/java/scripts/sql-init.sql`, or create a `restdb` database yourself. Connection settings are in `src/main/resources/application-localmysql.properties`:
 
-2. **Build and Run:**
-   ```
-   cd beer-project
-   mvn clean install
-   mvn spring-boot:run
-   ```
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/restdb
+spring.datasource.username=${DB_USERNAME:root}
+spring.datasource.password=${DB_PASSWORD:root}
+```
 
-3. **Access the Application:**
-   Open a web browser and go to `http://localhost:8080` to interact with the Beer Project.
+Set `DB_USERNAME` and `DB_PASSWORD` to override the defaults, then start with the profile:
 
-## Contributing:
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=localmysql
+```
 
-We welcome contributions from the community! If you'd like to enhance this project or identify issues, please feel free to submit pull requests or open new issues.
+## API Endpoints
 
-## License:
+### Beers
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/v1/beer` | List beers |
+| GET | `/api/v1/beer/{beerId}` | Get a beer |
+| POST | `/api/v1/beer` | Create a beer (returns `Location` header) |
+| PUT | `/api/v1/beer/{beerId}` | Update a beer |
+| DELETE | `/api/v1/beer/{beerId}` | Delete a beer |
 
----
+Beer body:
 
-Feel free to customize this description with specific details about your project, such as additional Spring Framework features you plan to implement, technologies you'll be using, and any specific goals you have in mind.
+```json
+{ "beerName": "Galaxy Cat", "beerStyle": "PALE_ALE", "upc": "12356", "price": 12.99, "quantityOnHand": 122 }
+```
+
+`beerStyle` is one of `LAGER, PILSNER, STOUT, GOSE, PORTER, ALE, WHEAT, IPA, PALE_ALE, SAISON`.
+
+### Customers
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/v1/customer` | List customers |
+| GET | `/api/v1/customer/{customerId}` | Get a customer |
+
+## Tests
+
+```bash
+./mvnw test
+```
