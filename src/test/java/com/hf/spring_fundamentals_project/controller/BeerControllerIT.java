@@ -1,7 +1,7 @@
 package com.hf.spring_fundamentals_project.controller;
 
 import com.hf.spring_fundamentals_project.mappers.BeerMapper;
-import com.hf.spring_fundamentals_project.model.Beer;
+import com.hf.spring_fundamentals_project.entities.Beer;
 import com.hf.spring_fundamentals_project.model.BeerDTO;
 import com.hf.spring_fundamentals_project.repositories.BeerRepository;
 import org.junit.jupiter.api.Test;
